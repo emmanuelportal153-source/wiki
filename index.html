@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wiki colaborativa — ¿Qué es una wiki?</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red: #c62828;
+  --dark: #111111;
+  --muted: #6b6b6b;
+  --light: #ffffff;
+  --surface: #f6f6f6;
+  --max-width: 1100px;
+  --radius: 10px;
+  --gap: 20px;
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--light);
+  color:var(--dark);
+  line-height:1.5;
+}
+
+.page{
+  max-width:var(--max-width);
+  margin:28px auto;
+  padding:18px;
+  background:linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+  border-radius:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
+}
+
+header.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:8px 12px;
+  margin-bottom:14px;
+  border-bottom:1px solid #eee;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand .logo{
+  width:140px;
+  height:40px;
+  background:var(--surface);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  font-weight:700;
+  font-size:14px;
+}
+
+.site-title{
+  font-size:18px;
+  font-weight:700;
+  color:var(--red);
+}
+
+.site-subtitle{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.skip-button{
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--red);
+  color:var(--red);
+  font-size:13px;
+  font-weight:600;
+}
+
+
+
+.layout{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:var(--gap);
+}
+
+aside.sidebar{
+  background:var(--red);
+  color:var(--light);
+  padding:20px;
+  border-radius:var(--radius);
+  min-height:360px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.sidebar-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:16px;
+  font-weight:600;
+}
+
+.sidebar-search{
+  background:transparent;
+  border:1px solid #ffffff;
+  border-radius:999px;
+  padding:2px 10px;
+  color:#ffffff;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.sidebar .menu-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.sidebar .menu-item:hover{
+  background:rgba(255,255,255,0.10);
+}
+
+.sidebar-footer{
+  margin-top:auto;
+  font-size:12px;
+  opacity:0.95;
+}
+
+main.content{
+  padding:20px;
+  background:var(--light);
+  border-radius:var(--radius);
+  box-shadow:0 3px 10px rgba(0,0,0,0.03);
+}
+
+.hero{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  margin-bottom:16px;
+}
+
+.hero-text h1{
+  color:var(--red);
+  font-size:28px;
+  margin:0 0 6px 0;
+}
+
+.hero-text p{
+  margin:0;
+  color:#333;
+  font-size:15px;
+}
+
+.hero-media{
+  flex:0 0 420px;
+  background:var(--surface);
+  border-radius:8px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-media {
+  max-width:100%;
+  height:auto;
+  border-radius:6px;
+}
+
+.article{
+  margin-top:12px;
+}
+
+.article h2{
+  font-size:20px;
+  color:var(--dark);
+  margin:16px 0 8px 0;
+}
+
+.article p{
+  font-size:15px;
+  text-align:justify;
+  color:#222;
+}
+
+.media-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:14px;
+}
+
+.card{
+  background:var(--surface);
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
+}
+
+.card img{
+  width:100%;
+  height:auto;
+  margin-top:8px;
+  border-radius:6px;
+}
+
+.video-wrap{
+  position:relative;
+  padding-top:56.25%;
+  overflow:hidden;
+  border-radius:8px;
+  margin-top:8px;
+}
+
+.video-wrap iframe{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+}
+
+footer.site-footer{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  font-size:14px;
+}
+
+.references ul{
+  margin-top:6px;
+  padding-left:18px;
+}
+
+@media (max-width:900px){
+  .layout{
+    grid-template-columns:1fr;
+  }
+  aside.sidebar{
+    order:2;
+  }
+  .hero{
+    flex-direction:column;
+  }
+  .hero-media{
+    flex:1;
+  }
+  .media-grid{
+    grid-template-columns:1fr;
+  }
+  .brand .logo{
+    width:110px;
+    height:34px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page" role="document">
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo"><img src="Captura de pantalla 2025-11-22 000703.png" width="80%" height="200%" alt=""/></div>
+    <div>
+      <div class="site-title">Wiki colaborativa</div>
+      <div class="site-subtitle">¿Qué es una wiki?</div>
+    </div>
+  </div>
+  <a href="#maincontent" class="skip-button">Ir al contenido</a>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Barra lateral de navegación">
+    <div class="sidebar-title">
+      <span>Menú</span>
+    </div>
+
+    <div class="menu-item" onclick="location.href='#inicio'">
+      <span>Inicio</span>
+    </div>
+    <div class="menu-item" onclick="location.href='#que-es'">
+      <span>¿Qué es una wiki?</span>
+    </div>
+    <div class="menu-item" onclick="location.href='#galeria'">
+      <span>Galería y videos</span>
+    </div>
+    <div class="menu-item" onclick="location.href='#contacto'">
+      <span>Contacto</span>
+    </div>
+
+    <div class="sidebar-footer">
+      Creado por:<br>
+      Farhod Emmanuel Aguirre Portal<br>
+      Alejandra Michelle Sánchez Terrazas
+    </div>
+  </aside>
+
+  <main id="maincontent" class="content" role="main">
+
+    <section id="inicio" class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <h1 id="hero-title">¿Qué es una wiki colaborativa?</h1>
+        <p>
+          Una wiki es un sitio web donde varias personas pueden escribir, editar
+          y actualizar información de forma sencilla. La idea es que el contenido
+          se construye entre todos: alguien crea una página, otros la corrigen,
+          agregan ejemplos o actualizan los datos.
+        </p>
+        <p>
+          Las wikis se usan mucho para compartir conocimientos, hacer resúmenes,
+          explicar temas de clase o documentar información importante dentro de
+          un grupo o una comunidad.
+        </p>
+      </div>
+
+      <div class="hero-media"><img src="imagen1.jpg" width="100%" height="100%" alt=""/></div>
+    </section>
+
+    <article class="article">
+      <h2 id="que-es">¿Para qué sirve una wiki?</h2>
+      <p>
+        Una wiki sirve para organizar información de manera clara y que cualquier
+        persona del equipo pueda participar. Se pueden crear páginas con conceptos,
+        ejemplos, pasos de un proceso o materiales de apoyo. Cada página se puede
+        editar desde el navegador sin tener que saber programación.
+      </p>
+      <p>
+        Otra ventaja es que normalmente se guarda un historial de cambios. Esto
+        permite ver quién modificó qué, corregir errores y recuperar versiones
+        anteriores en caso de que algo salga mal.
+      </p>
+
+      <h2 id="galeria">Ejemplos visuales y videos</h2>
+      <p>
+        A continuación se muestran algunas imágenes y videos relacionados con el
+        tema de las wikis, el estudio y la organización de información.
+      </p>
+
+      <div class="media-grid">
+
+        <div class="card">
+          <strong>Imagen: Estudio y búsqueda de información</strong>
+          <img src="imagen2.jpg" width="100%" height="100%" alt=""/>
+          <p>
+            Representa cómo una wiki ayuda a buscar, leer y organizar información
+            de diferentes fuentes.
+          </p>
+        </div>
+
+        <div class="card">
+          <strong>Imagen: Conclusión clara</strong>
+          <img src="imagen3.jpg" alt="">
+          <p>
+            Recuerda que al final de un artículo en la wiki es importante cerrar con
+            una idea clara para que el lector se quede con un mensaje concreto.
+          </p>
+        </div>
+
+        <div class="card">
+          <strong>Video: ¿Qué es una wiki?</strong>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/peMmvnQX1sk"
+                    title="Video: ¿Qué es una wiki?"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+          </div>
+          <p>
+            Video introductorio que explica de forma sencilla qué es una wiki y
+            cómo se puede usar en diferentes contextos.
+          </p>
+        </div>
+
+        <div class="card">
+          <strong>Video: Wikis y trabajo colaborativo</strong>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/IjnA8xvFXK8"
+                    title="Video: Wikis y colaboración"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+          </div>
+          <p>
+            Muestra cómo las wikis apoyan el trabajo en equipo, la organización de
+            tareas y la construcción de conocimiento en grupo.
+          </p>
+        </div>
+
+      </div>
+
+      <h2>¿Qué debería incluir tu propia página de wiki?</h2>
+      <p>
+        Si quieres crear una página similar para otro tema, es recomendable que
+        siempre incluyas:
+      </p>
+      <ul>
+        <li>Un título claro del tema.</li>
+        <li>Una explicación breve y directa.</li>
+        <li>Al menos una imagen que represente el contenido.</li>
+        <li>Algún video o recurso extra que complemente la información.</li>
+        <li>Tu nombre o el de tu equipo como creadores.</li>
+        <li>Referencias básicas de dónde obtuviste la información.</li>
+      </ul>
+
+    </article>
+
+    <footer id="contacto" class="site-footer" role="contentinfo">
+      <div class="references">
+        <strong>Referencias</strong>
+        <ul>
+          <li>Wikipedia. Entrada "Wiki": https://es.wikipedia.org/wiki/Wiki</li>
+          <li>MediaWiki. Sitio oficial del software para wikis: https://www.mediawiki.org/</li>
+          <li>Video de YouTube: https://www.youtube.com/watch?v=peMmvnQX1sk</li>
+          <li>Video de YouTube: https://www.youtube.com/watch?v=IjnA8xvFXK8</li>
+        </ul>
+      </div>
+
+      <div class="credits">
+        Página de ejemplo para la Wiki UVM.
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+</div>
+</body>
+</html>
